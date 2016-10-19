@@ -47,11 +47,15 @@ app.listen(process.env.PORT || 1337);
 
 // Path to save the files
 if (process.env.uploadpath == undefined) {
-    var uploadpath = 'C:/Uploads/CelerFT/';
+    var uploadpath = '/app/public/public/';
 }
 else {
     var uploadpath = process.env.uploadpath;
 }
+
+console.log('uploadpath ' + uploadpath);
+uploadpath = '/app/public/';
+console.log('uploadpath ' + uploadpath);
 
 // Use the post method for express.js to respond to posts to the uploadchunk urls and
 // save each file chunk as a separate file
@@ -204,7 +208,8 @@ app.get('*/api/CelerFTFileUpload/MergeAll*', function (request, response) {
         var baseFilename = path.basename(request.param('filename'), extension);
         
         var localFilePath = uploadpath + request.param('directoryname') + '/' + baseFilename;
-
+        console.log('baseFilename ' + baseFilename);
+        console.log('localFilePath ' + localFilePath);
         // Check if all of the file chunks have be uploaded
         // Note we only wnat the files with a *.tmp extension
         var files = getfilesWithExtensionName(localFilePath, 'tmp')
